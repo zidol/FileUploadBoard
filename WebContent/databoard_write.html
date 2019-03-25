@@ -33,7 +33,7 @@
 <link href="databoard.css" rel="stylesheet" type="text/css">
 </head>
 <body>
-<form name="msgwrite" method="post" enctype="multipart/form-data" action="databoard_save.jsp">
+<form name="msgwrite" method="post" action="databoard_save.jsp" enctype="multipart/form-data">
 	<div align="center">
 		<table width="600" cellspacing="0" cellpadding="2">
 			<tr>
@@ -61,11 +61,11 @@
 				</td>
 			</tr>
 			<tr>
-				<td width="124" bgcolor="#f4f4f4" style="padding: 0 0 0 14">
-					<div align="center">첨부파일</div>
+				<td width="124" align="center" bgcolor="#f4f4f4" style="padding=0 0 0 14">
+					<div align="center">첨부 파일</div>
 				</td>
 				<td width="494" style="padding: 5 0 5 10" height="25">
-					<input type="file" name="file" size="30" >
+					<input type="file" name="file" size="30">
 				</td>
 			</tr>
 			<tr>

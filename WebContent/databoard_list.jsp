@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>글 리스트 보기</title>
-<link href="freeboard.css" rel="stylesheet" type="text/css">
+<link href="databoard.css" rel="stylesheet" type="text/css">
 <script type="text/javascript">
 	function check() {
 		with (document.msgsearch) {
@@ -183,13 +183,13 @@
 								for (int count = 0; count < stepi; count++)
 									out.print("&nbsp;&nbsp;");
 								out.println("<img name='icon'" + imgcount + " src='image/arrow.gif'>");
-								out.print("<a href=freeboard_read.jsp?id=");
+								out.print("<a href=databoard_read.jsp?id=");
 								out.print(keyid.get(j) + "&page=" + where);
 								out.print(" onmouseover=\"rimgchg(" + imgcount + ", 1)\"");
 								out.print(" onmouseout=\"rimgchg(" + imgcount + ", 2)\">");
 							} else {
 								out.println("<img name=icon" + imgcount + " src=image/close.gif>");
-								out.print("<a href=freeboard_read.jsp?id=");
+								out.print("<a href=databoard_read.jsp?id=");
 								out.print(keyid.get(j) + "&page=" + where);
 								out.print(" onmouseover=\"imgchg(" + imgcount + ", 1)\"");
 								out.print(" onmouseout=\"imgchg(" + imgcount + ", 2)\">");
@@ -215,8 +215,8 @@
 				}
 
 				if (wheregroup > 1) {
-					out.println("[<a href=freeboard_list.jsp?gogroup=1>처음</a>]");
-					out.println("[<a href=freeboard_list.jsp?gogroup=" + priorgroup + ">이전</a>]");
+					out.println("[<a href=databoard_list.jsp?gogroup=1>처음</a>]");
+					out.println("[<a href=databoard_list.jsp?gogroup=" + priorgroup + ">이전</a>]");
 				} else {
 					out.println("[처음]");
 					out.println("[이전]");
@@ -226,7 +226,7 @@
 						if (jj == where)
 							out.println("[" + jj + "]");
 						else
-							out.println("[<a href=freeboard_list.jsp?go=" + jj + ">" + jj + "</a>]");
+							out.println("[<a href=databoard_list.jsp?go=" + jj + ">" + jj + "</a>]");
 					}
 				}
 				if (wheregroup < totalgroup) {
@@ -241,12 +241,12 @@
 			<!--<TABLE border=0 width=600 cellpadding=0 cellspacing=0>
  <TR>
   <TD align=right valign=bottom>
-   <A href="freeboard_write.htm"><img src="image/write.gif" width="66" height="21" border="0"></A>
+   <A href="databoard_write.htm"><img src="image/write.gif" width="66" height="21" border="0"></A>
    </TD>
   </TR>
  </TABLE>-->
 
-			<form method="post" name="msgsearch" action="freeboard_search.jsp">
+			<form method="post" name="msgsearch" action="databoard_search.jsp">
 				<table border="0" width="600" cellpadding="0" cellspacing="0">
 					<tr>
 						<td align="right" width="241"><select name="stype">

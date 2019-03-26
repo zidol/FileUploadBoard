@@ -19,6 +19,10 @@
 		ResultSet rs = null;
 
 		int id = Integer.parseInt(request.getParameter("id"));
+		
+		String saveFolder = "/upload";
+		ServletContext context = getServletContext();
+		String url = context.getRealPath(saveFolder);
 
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
@@ -27,13 +31,13 @@
 		}
 
 		try {
-			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/fboard?useSSL=false", "multi", "1234");
+			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/dboard?useSSL=false", "multi", "1234");
 		} catch (SQLException e) {
 			out.println(e);
 		}
 
 		try {
-			sql = "select * from freeboard where id=?";
+			sql = "select * from databoard where id=?";
 			st = con.prepareStatement(sql);
 			st.setInt(1, id);
 			rs = st.executeQuery();
@@ -41,6 +45,12 @@
 			if (!rs.next()) {
 				out.println("해당 내용이 없습니다");
 			} else {
+				String finame = rs.getString("filename");
+				if(finame != null && !(finame.equals(""))){
+					finame = "<a href=down.jsp?file=" + finame +">" + finame + "</a>";
+					finame = finame +" ( " + rs.getInt("filesize") + " Bytes)";
+				}
+				
 				String em = rs.getString("email");
 				if ((em != null) && (!(em.equals(""))))
 					em = "<a href=mailto:" + em + ">" + rs.getString("name") + "</A>";
@@ -63,6 +73,7 @@
 				out.println("<tr bgcolor='#F4F4F4'>");
 				out.println("<td width='13%' height='7'></td>");
 				out.println("<td width='51%' height='7'>글쓴이 : " + em + "</td>");
+				out.println("<td width='51%' height='7'>파일 이름 : " + finame + "</td>");
 				out.println("<td width='25%' height='7'></td>");
 				out.println("<td width='11%' height='7'></td>");
 				out.println("</tr>");
@@ -98,24 +109,24 @@
 		<table width="600" border="0" cellpadding="0" cellspacing="5">
 			<tr>
 				<td align="right" width="450"><a
-					href="freeboard_list.jsp?go=<%=request.getParameter("page")%>">
+					href="databoard_list.jsp?go=<%=request.getParameter("page")%>">
 						<img src="image/list.jpg" border=0>
 				</a></td>
 				<td width="70" align="right"><a
-					href="freeboard_rwrite.jsp?id=<%=request.getParameter("id")%>&page=<%=request.getParameter("page")%>">
+					href="databoard_rwrite.jsp?id=<%=request.getParameter("id")%>&page=<%=request.getParameter("page")%>">
 						<img src="image/reply.jpg" border=0>
 				</a></td>
 				<td width="70" align="right"><a
-					href="freeboard_upd.jsp?id=<%=id%>&page=1"> <img
+					href="databoard_upd.jsp?id=<%=id%>&page=1"> <img
 						src="image/edit.jpg" border=0></a></td>
 				<td width="70" align="right"><a
-					href="freeboard_del.jsp?id=<%=id%>&page=1"> <img
+					href="databoard_del.jsp?id=<%=id%>&page=1"> <img
 						src="image/del.jpg" border=0></a></td>
 			</tr>
 		</table>
 	</div>
 	<%
-		sql = "update freeboard set readcount= readcount + 1 where id=?";
+		sql = "update databoard set readcount= readcount + 1 where id=?";
 				st = con.prepareStatement(sql);
 				st.setInt(1, id);
 				st.executeUpdate();
